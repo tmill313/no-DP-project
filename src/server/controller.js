@@ -12,12 +12,7 @@ fav: 77,
 text: "howdy",
 time: 1202,
 fav: 44
-},
-{id:4, 
-text: "niceeeeee",
-time: 1203,
-fav: 55
-}];
+},];
 id = 5;
 
 module.exports = {

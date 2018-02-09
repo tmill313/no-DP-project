@@ -1,21 +1,22 @@
 .body {
-    height: 50vh;
-    width: 100%;
-    background: rebeccapurple;
+
 }
 input {
     margin-top: 25px;
     border: none;
     width: 40%;
     height: 35px;
+    border: solid;
+    border-color: lightblue;
 }
-button {
+.submit-button {
     width: 60px;
     height: 45px;
     margin: 10px;
     border-radius: 50px;
     font-size: 14px;
     background-color: lightgreen;
+
   
 }
     
