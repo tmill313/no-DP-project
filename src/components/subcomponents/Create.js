@@ -3,6 +3,7 @@ import axios from 'axios';
 import './Create.css';
 import Delete from './Delete';
 import Update from './Update';
+import Favorite from './Favorite';
 
 
 export default class Create extends Component {
@@ -12,12 +13,13 @@ export default class Create extends Component {
             messages: [],
             text: '',
             time: 0,
-            fav: 0
+            fav: 0,
         }
         this.handleChange=this.handleChange.bind(this);
         this.createMessage=this.createMessage.bind(this);
         this.delete=this.delete.bind(this);
         this.update=this.update.bind(this);
+        this.favorite=this.favorite.bind(this);
     }
    
     componentDidMount() {
@@ -28,6 +30,19 @@ export default class Create extends Component {
         })
     }
 
+    favorite(id) {
+        const {text, time, fav} = this.state.messages.find((i) => i.id === id);
+        console.log(text, time, fav);
+         axios.put(`api/messages/fav/${id}`, {id, text, time, fav}).then(res => {
+            console.log(res.data)
+            this.setState({
+                messages: res.data
+            })
+            console.log(res.data)
+        })
+    }
+
+
     update(id) {
         this.setState({
             time: new Date ()
@@ -37,6 +52,7 @@ export default class Create extends Component {
             this.setState({
                 messages: res.data
             })
+            console.log(res.data)
             
         })
     }
@@ -68,12 +84,14 @@ export default class Create extends Component {
     }
 
     render() {
-       let mess = this.state.messages.map(obj => {
+       let mess = this.state.messages.sort((a, b) => b.fav - a.fav).map(obj => {
            return (
                <div className="message-box">
                    <p>{obj.text}</p>
                    <p>{obj.time}</p>
-                   <p>{obj.fav}</p>
+                   <div>
+                    <Favorite favorite={this.favorite} fav={obj.fav} id={obj.id}/>
+                   </div>
                    <div>
                    <Delete delete={this.delete} id={obj.id}/>
                    </div>
