@@ -8,7 +8,7 @@ export default class Favorite extends Component {
 
     render() {
         return(
-            <button className="submit-button" onClick={() => {this.props.favorite(this.props.id)}}>{(this.props.fav)}</button>
+            <button className="favorite-button" onClick={() => {this.props.favorite(this.props.id)}}></button>
         )
     }
 

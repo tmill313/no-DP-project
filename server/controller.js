@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-messages = [{id:1, 
+messages = [{id:1,
     text: "heyyyywassup",
 time: 1200,
 fav: 99
@@ -49,6 +49,17 @@ favorite: (req, res) => {
         text: messages[index].text,
         time: messages[index].time,
         fav: ++req.body.fav
+    }
+    console.log(req.body)
+    res.status(200).send(messages)
+},
+downvote: (req, res) => {
+    let index = messages.findIndex(message => message.id == req.params.id);
+    messages[index] = {
+        id: messages[index].id,
+        text: messages[index].text,
+        time: messages[index].time,
+        fav: --req.body.fav
     }
     console.log(req.body)
     res.status(200).send(messages)

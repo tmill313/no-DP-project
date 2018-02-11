@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import './Update.css';
 
 export default class Update extends Component {
     constructor() {
@@ -22,7 +23,7 @@ render() {
             <input onChange={e => this.props.handleChange(e)}></input>
             <button className="submit-button" onClick={() => {this.props.update(this.props.id); this.setState({
                 editting: !this.state.editting
-            })}}> YO - DUH </button>
+            })}}>Change me</button>
             </div>
             :
 

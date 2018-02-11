@@ -13,5 +13,6 @@ app.post('/api/messages', ctrl.create);
 app.put('/api/messages/:id', ctrl.update);
 app.delete('/api/messages/:id', ctrl.delete);
 app.put('/api/messages/fav/:id', ctrl.favorite);
+app.put('/api/messages/down/:id', ctrl.downvote);
 
 

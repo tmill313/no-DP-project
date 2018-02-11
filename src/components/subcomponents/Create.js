@@ -4,6 +4,8 @@ import './Create.css';
 import Delete from './Delete';
 import Update from './Update';
 import Favorite from './Favorite';
+import cors from 'cors';
+import Downvote from './Downvote';
 
 
 export default class Create extends Component {
@@ -12,14 +14,16 @@ export default class Create extends Component {
         this.state = {
             messages: [],
             text: '',
-            time: 0,
+            time: new Date (),
             fav: 0,
+            
         }
         this.handleChange=this.handleChange.bind(this);
         this.createMessage=this.createMessage.bind(this);
         this.delete=this.delete.bind(this);
         this.update=this.update.bind(this);
         this.favorite=this.favorite.bind(this);
+        this.downVote=this.downVote.bind(this);
     }
    
     componentDidMount() {
@@ -42,11 +46,19 @@ export default class Create extends Component {
         })
     }
 
+    downVote(id) {
+        const {text, time, fav} = this.state.messages.find((i) => i.id === id);
+        console.log(text, time, fav);
+         axios.put(`api/messages/down/${id}`, {id, text, time, fav}).then(res => {
+            console.log(res.data)
+            this.setState({
+                messages: res.data
+            })
+            console.log(res.data)
+        })
+    }
 
     update(id) {
-        this.setState({
-            time: new Date ()
-        })
         const {text, time, fav} = this.state;
         axios.put(`/api/messages/${id}`, {id, text, time, fav}).then(res => {
             this.setState({
@@ -74,12 +86,14 @@ export default class Create extends Component {
         });
     }
 
+
+
     createMessage(e) {
-        this.setState({
-            time: new Date()
-        })
+            this.setState({
+                time: new Date()
+            })
         const {text, time, fav} = this.state;
-        axios.post('/api/messages', {text, time, fav}).then( res => {
+        axios.post('/api/messages', { text, time, fav}).then( res => {
     this.setState({messages: res.data})})
     }
 
@@ -89,11 +103,17 @@ export default class Create extends Component {
                <div className="message-box">
                    <p>{obj.text}</p>
                    <p>{obj.time}</p>
+                    <div className="buttons-div">
                    <div>
                     <Favorite favorite={this.favorite} fav={obj.fav} id={obj.id}/>
                    </div>
+                   <p>{obj.fav}</p>
+                   <div>
+                    <Downvote downVote={this.downVote} fav={obj.fav} id={obj.id}/>
+                   </div>
                    <div>
                    <Delete delete={this.delete} id={obj.id}/>
+                   </div>
                    </div>
                    <div>
                    <Update handleChange={this.handleChange} update={this.update} id={obj.id}/>
