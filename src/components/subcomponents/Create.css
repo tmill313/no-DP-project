@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Bungee|Faster+One');
 
 .message-box {
+    font: black;
     border: solid;
     border-color: lightgray;
     background: white;
@@ -32,6 +33,7 @@
 }
 
 .delete-button {
+    font: black;
     width: 40px;
     height: 90px;
     border-color: white;
@@ -102,11 +104,7 @@ grid-template-columns: 5vw auto 7vw 2vw 7vw 5vw;
     grid-column: 6 / 7;
     grid-row: 2 / 3;
 }
-.update-div {
-    margin-top: 5vh;
-    grid-column: 1 / 2;
-    grid-row: 2 / 3;
-}
+
 .text-p {
     justify-self: start;
     align-self: center;
@@ -118,9 +116,16 @@ grid-template-columns: 5vw auto 7vw 2vw 7vw 5vw;
     overflow: auto;
 }
 .time-p {
+    color: black;
     justify-self: end;
     grid-column: 2 / 3;
     grid-row: 1 / 2;
     font-family: 'Faster One', cursive;
     margin-right: 2vw;
+}
+.named-p {
+    justify-self: start;
+    font-family: 'Faster One', cursive;
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
 }

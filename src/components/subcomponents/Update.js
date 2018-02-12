@@ -30,7 +30,7 @@ render() {
             </div>
             </div>
             :
-            <div clasName="update-div">
+            <div className="update-div">
         <button className="update-button" onClick={() => this.setState({ 
             editting: !this.state.editting
         })}></button>

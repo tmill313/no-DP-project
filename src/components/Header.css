@@ -1,9 +1,13 @@
 .header {
     width: 100%;
+    /* position: fixed; */
+    z-index: 100;
+    padding: 15rem;
 
 }
 h6 {
     font-family: 'Faster One', cursive;
     font-size: 100px;
     color: white;
+    margin: 0;
 }

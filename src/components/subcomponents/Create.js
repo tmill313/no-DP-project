@@ -16,7 +16,7 @@ export default class Create extends Component {
             text: '',
             time: new Date().toLocaleString(),
             fav: 0,
-            
+            named: ''
         }
         this.handleChange=this.handleChange.bind(this);
         this.createMessage=this.createMessage.bind(this);
@@ -35,9 +35,9 @@ export default class Create extends Component {
     }
 
     favorite(id) {
-        const {text, time, fav} = this.state.messages.find((i) => i.id === id);
+        const {named, text, time, fav} = this.state.messages.find((i) => i.id === id);
         console.log(text, time, fav);
-         axios.put(`api/messages/fav/${id}`, {id, text, time, fav}).then(res => {
+         axios.put(`api/messages/fav/${id}`, {id, named, text, time, fav}).then(res => {
             console.log(res.data)
             this.setState({
                 messages: res.data
@@ -47,9 +47,9 @@ export default class Create extends Component {
     }
 
     downVote(id) {
-        const {text, time, fav} = this.state.messages.find((i) => i.id === id);
+        const {named, text, time, fav} = this.state.messages.find((i) => i.id === id);
         console.log(text, time, fav);
-         axios.put(`api/messages/down/${id}`, {id, text, time, fav}).then(res => {
+         axios.put(`api/messages/down/${id}`, {id, named, text, time, fav}).then(res => {
             console.log(res.data)
             this.setState({
                 messages: res.data
@@ -59,8 +59,8 @@ export default class Create extends Component {
     }
 
     update(id) {
-        const {text, time, fav} = this.state;
-        axios.put(`/api/messages/${id}`, {id, text, time, fav}).then(res => {
+        const {named, text, time, fav} = this.state;
+        axios.put(`/api/messages/${id}`, {id, named, text, time, fav}).then(res => {
             this.setState({
                 messages: res.data
             })
@@ -89,21 +89,33 @@ export default class Create extends Component {
 
 
     createMessage(e) {
-            this.setState({
-                time: new Date()
-            })
+        let newText = JSON.stringify(this.state.text);
+        let yodaSpeak = newText.split(' ').join('+');
+        console.log(yodaSpeak)
+        var configs = {
+        "headers" : {"X-Mashape-Key": "uIZW9W23zimshKJJPdI4HkSQwLRkp14btYNjsnd0o265VD6MiT", "X-Mashape-Host": "yoda.p.mashape.com"}
+        };
+        axios.get(`https://yoda.p.mashape.com/yoda?sentence=${yodaSpeak}`, configs).then(res => {
+        console.log(res.data)
+        this.setState({
+        text: res.data
+        })
         const {text, time, fav} = this.state;
         axios.post('/api/messages', { text, time, fav}).then( res => {
-    this.setState({messages: res.data})})
+        this.setState({messages: res.data})})
+        })
     }
+
+
 
     render() {
        let mess = this.state.messages.sort((a, b) => b.fav - a.fav).map(obj => {
            return (
                <div className="message-box">
                     <div className="text-time-div">
+                    <p className="named-p">{obj.named}</p>
                     <h3 className="time-p">{obj.time}</h3>
-                    <p className="text-p">{obj.text}</p>
+                    <p className="text-p">{obj.text.replace(/['"]+/g, '')}</p>
                    </div>
                     <div className="buttons-div">
                    <div className="fav-button-div">
