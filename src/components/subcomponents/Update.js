@@ -20,16 +20,21 @@ render() {
 
             ?
             <div>
-            <input onChange={e => this.props.handleChange(e)}></input>
-            <button className="submit-button" onClick={() => {this.props.update(this.props.id); this.setState({
+                <div className="edit-box-div">
+            <input className="edit-box" onChange={e => this.props.handleChange(e)}></input>
+            </div>
+            <div>
+            <button className="updated-button" onClick={() => {this.props.update(this.props.id); this.setState({
                 editting: !this.state.editting
-            })}}>Change me</button>
+            })}}></button>
+            </div>
             </div>
             :
-
-        <button onClick={() => this.setState({ 
+            <div clasName="update-div">
+        <button className="update-button" onClick={() => this.setState({ 
             editting: !this.state.editting
-        })}> change me </button>
+        })}></button>
+        </div>
         }
         </div>
     )

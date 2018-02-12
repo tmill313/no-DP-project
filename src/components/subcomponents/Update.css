@@ -1,3 +1,43 @@
-.edit-button {
-    background-image: image("/ic_create_black_24px.svg")
+.update-button {
+    margin-top: 4.75vh;
+    margin-left: 2vh;
+    width: 52px;
+    height: 79px;
+    border-color: white;
+    background: lightgreen;
+    border-radius: 50px;
+    font-size: 14px;
+    background: url("./img/BB8.svg") no-repeat center;
+}
+.updated-button {
+    width: 52px;
+    height: 79px;
+    margin-top: 4.75vh;
+    margin-left: 2vh;
+    border-color: white;
+    background: lightgreen;
+    border-radius: 50px;
+    font-size: 14px;
+    background: url("./img/BB8.svg") no-repeat center;
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+.edit-box {
+    margin-top: 6vh;
+    margin-left: 1vh;
+    width: 20vw;
+    height: 5vh;
+    border: solid;
+
+}
+.updated-button-div {
+    position: absolute;
+
+}
+.edit-box-div{
+    position: absolute;
+    margin-left: 6vw;
 }

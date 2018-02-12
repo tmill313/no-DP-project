@@ -14,7 +14,7 @@ export default class Create extends Component {
         this.state = {
             messages: [],
             text: '',
-            time: new Date (),
+            time: new Date().toLocaleString(),
             fav: 0,
             
         }
@@ -101,30 +101,32 @@ export default class Create extends Component {
        let mess = this.state.messages.sort((a, b) => b.fav - a.fav).map(obj => {
            return (
                <div className="message-box">
-                   <p>{obj.text}</p>
-                   <p>{obj.time}</p>
+                    <div className="text-time-div">
+                    <h3 className="time-p">{obj.time}</h3>
+                    <p className="text-p">{obj.text}</p>
+                   </div>
                     <div className="buttons-div">
-                   <div>
+                   <div className="fav-button-div">
                     <Favorite favorite={this.favorite} fav={obj.fav} id={obj.id}/>
                    </div>
-                   <p>{obj.fav}</p>
-                   <div>
+                   <p className="fav-p">{obj.fav}</p>
+                   <div className="downvote-div">
                     <Downvote downVote={this.downVote} fav={obj.fav} id={obj.id}/>
                    </div>
-                   <div>
+                   <div className="delete-div">
                    <Delete delete={this.delete} id={obj.id}/>
                    </div>
-                   </div>
-                   <div>
+                   <div  className="updated-button-div">
                    <Update handleChange={this.handleChange} update={this.update} id={obj.id}/>
+                   </div>
                    </div>
                </div>
            )
        })
         return(<div>
             <div className="message-div">{mess}</div>
-            <input className="input-box" placeholder={"Say what you wanna say."} onChange={e=>this.handleChange(e)}></input>
-            <button className="submit-button" onClick={this.createMessage}> YO - DUH </button>
+            <input className="edit-input-box" placeholder={"Say what you wanna say."} onChange={e=>this.handleChange(e)}></input>
+            <button className="submit-button" onClick={this.createMessage}> </button>
             </div>
         )
     }
